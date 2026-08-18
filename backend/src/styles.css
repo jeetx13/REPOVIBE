@@ -1,0 +1,236 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * RepoVibe design system — warm cream paper, forest green ink, amber accents.
+ * Every color/font/shadow lives here as a token. Components never hardcode hex.
+ */
+
+@theme {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-cream-50: #fbfaf6;
+  --color-cream-100: #f7f5f0;
+  --color-cream-200: #efebe0;
+  --color-cream-300: #e2dcc9;
+
+  --color-forest-50: #e8f0ea;
+  --color-forest-100: #c9ddd0;
+  --color-forest-200: #93b69e;
+  --color-forest-300: #5e8e6c;
+  --color-forest-400: #3b6e4b;
+  --color-forest-500: #2a5238;
+  --color-forest-600: #1f3f2a;
+  --color-forest-700: #163021;
+  --color-forest-800: #0f2016;
+
+  --color-amber-50: #fdf3e3;
+  --color-amber-100: #fae5bf;
+  --color-amber-200: #f4c97a;
+  --color-amber-300: #eba84a;
+  --color-amber-400: #d98a2b;
+  --color-amber-500: #b96d1a;
+  --color-amber-600: #925316;
+
+  --color-coral-400: #e8765a;
+  --color-coral-500: #d85a3e;
+
+  --color-charcoal-700: #3a3530;
+  --color-charcoal-800: #2a2622;
+  --color-charcoal-900: #1c1a17;
+
+  --animate-spin-slow: spin 18s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-marquee: marquee 32s linear infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* shadcn semantic tokens mapped onto the RepoVibe palette */
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(96.5% 0.011 95);
+  --foreground: oklch(24% 0.012 60);
+  --card: oklch(98% 0.008 95);
+  --card-foreground: oklch(24% 0.012 60);
+  --popover: oklch(98% 0.008 95);
+  --popover-foreground: oklch(24% 0.012 60);
+  --primary: oklch(38% 0.062 155);
+  --primary-foreground: oklch(97% 0.01 95);
+  --secondary: oklch(92% 0.018 95);
+  --secondary-foreground: oklch(30% 0.05 155);
+  --muted: oklch(92% 0.018 95);
+  --muted-foreground: oklch(48% 0.02 80);
+  --accent: oklch(83% 0.1 80);
+  --accent-foreground: oklch(24% 0.012 60);
+  --destructive: oklch(59% 0.15 30);
+  --destructive-foreground: oklch(97% 0.01 95);
+  --border: oklch(88% 0.024 92);
+  --input: oklch(88% 0.024 92);
+  --ring: oklch(60% 0.05 155);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-cream-100);
+    color: var(--color-charcoal-800);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    line-height: 1.15;
+  }
+
+  ::selection {
+    background-color: var(--color-amber-200);
+    color: var(--color-charcoal-900);
+  }
+
+  /* Lenis smooth scroll */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility glass {
+  background: rgba(247, 245, 240, 0.7);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+
+@utility glass-dark {
+  background: rgba(31, 63, 42, 0.85);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+@utility shadow-soft {
+  box-shadow:
+    0 1px 2px rgba(28, 26, 23, 0.04),
+    0 8px 24px rgba(28, 26, 23, 0.06);
+}
+
+@utility shadow-lift {
+  box-shadow:
+    0 2px 4px rgba(28, 26, 23, 0.05),
+    0 18px 48px rgba(28, 26, 23, 0.12);
+}
+
+@utility perspective {
+  perspective: 1200px;
+}
+
+@utility preserve-3d {
+  transform-style: preserve-3d;
+}
+
+@utility backface-hidden {
+  backface-visibility: hidden;
+}
+
+@utility bg-grain {
+  background-image: radial-gradient(rgba(42, 82, 56, 0.05) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #efebe0;
+}
+::-webkit-scrollbar-thumb {
+  background: #93b69e;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5e8e6c;
+}
+
+/* Recharts polish */
+.recharts-cartesian-axis-tick text {
+  fill: #5e8e6c;
+  font-size: 12px;
+}
+.recharts-default-tooltip {
+  border-radius: 12px !important;
+  border: none !important;
+  box-shadow: 0 8px 24px rgba(28, 26, 23, 0.12) !important;
+}
